@@ -3,7 +3,7 @@ package com.meritamerica.assignment2;
 /*Savings Account class for user
  * Created by Robert J
  */
-public class SavingsAccount {
+public class SavingsAccount extends BankAccount{
 
 	// All constants needed in class
 	private static final double INTEREST_RATE = .01;

@@ -1,7 +1,7 @@
 package com.meritamerica.assignment2;
 
 //Created by Behulum W
-public class CheckingAccount {
+public class CheckingAccount extends BankAccount {
 
 	private double cBalance;
 
