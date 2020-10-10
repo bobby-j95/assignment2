@@ -4,6 +4,9 @@ public class CDOffering {
 	int term;
 	double interestRate;
 	
+	//created by behulum w
+	
+	
 	CDOffering(){
 	}
 	
