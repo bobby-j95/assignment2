@@ -2,10 +2,11 @@ package com.meritamerica.assignment2;
 
 import java.util.Date;
 
-public class CDAccount extends BankAccount {
-	public CDOffering offering = new CDOffering();
-	public int term;
-	public Date startDate = new Date();
+public class CDAccount extends BankAccount{
+	private CDOffering offering = new CDOffering();
+	private int term;
+	private Date startDate = new Date();
+	private double balance;
 	
 	//*created by behulum w
 	
@@ -19,7 +20,17 @@ public class CDAccount extends BankAccount {
 	}
 	
 	public double getInterestRate() {
-		return this.interestRate;
+		if (term==1) {
+			return 1.8/100;
+		}else if (term==2) {
+			return 1.9/100;
+		}else if (term==3) {
+			return 2.0/100;
+		}else if (term==5) {
+			return 2.5/100;
+		}else {
+			return 2.2/100;
+		}
 	}
 	
 	public int getTerm() {
@@ -29,7 +40,7 @@ public class CDAccount extends BankAccount {
 	public java.util.Date getStartDate(){
 		return this.startDate;
 	}
-	
+
 	// created by behulum w
 	
 	public long getAccountNumber() {
