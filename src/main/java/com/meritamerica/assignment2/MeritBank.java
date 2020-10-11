@@ -10,16 +10,17 @@ import java.util.Random;
 public class MeritBank {
 
 	// All private variables needed in the program
-	private static int initSize = 5;
 	private static int numOfAccountHolder = 0;
 	private static long nextAccountNumber = 1;
-	private static AccountHolder[] accountHolderArray = new AccountHolder[initSize];
-	private static CDOffering[] cdOffering = new CDOffering[initSize];
+	private static AccountHolder[] accountHolderArray = new AccountHolder[0];
+	private static CDOffering[] cdOffering = new CDOffering[5];
 	private static double totalValue = 0;
 
 	//This adds another AccountHolder to the array
 	static void addAccountHolder(AccountHolder accountHolder) {
-		accountHolderArray[numOfAccountHolder] = accountHolder;
+		AccountHolder[] tempAccHolder = new AccountHolder[accountHolderArray.length+1];
+		tempAccHolder[numOfAccountHolder] = accountHolder;
+		accountHolderArray = tempAccHolder;
 		numOfAccountHolder++;
 	}
 	

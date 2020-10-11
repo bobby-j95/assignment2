@@ -1,6 +1,5 @@
 package com.meritamerica.assignment2;
 
-import java.util.Arrays;
 import com.meritamerica.assignment2.CheckingAccount;
 import com.meritamerica.assignment2.SavingsAccount;
 
@@ -25,8 +24,8 @@ public class AccountHolder {
 	private int numberOfSavingsAccount;
 	private int numberOfCheckingAccount;
 	private double totalBalance;
-	private SavingsAccount[] savingsAccount = new SavingsAccount[initSize];
-	private CheckingAccount[] checkingAccount = new CheckingAccount[initSize];
+	private SavingsAccount[] savingsAccount = new SavingsAccount[0];
+	private CheckingAccount[] checkingAccount = new CheckingAccount[0];
 	private CDAccount[] cdAccount = new CDAccount[initSize];
 	private static int initSize = 5;
 
@@ -116,12 +115,14 @@ public class AccountHolder {
 	 */
 	public CheckingAccount addCheckingAccount(double openingBalance) {
 		CheckingAccount checking = new CheckingAccount(openingBalance);
-		if (getCombinedBalance() < 250000) {
-			checkingAccount[numberOfSavingsAccount] = checking;
+		CheckingAccount[] tempArray = new CheckingAccount[checkingAccount.length + 1];
+		if (getCheckingBalance() + getSavingsBalance() + openingBalance < 250000.00) {
+			tempArray[numberOfCheckingAccount] = checking;
 			numberOfCheckingAccount++;
 		} else {
-			return null;
+			return checking;
 		}
+		checkingAccount = tempArray;
 		return checking;
 	}
 
@@ -130,12 +131,14 @@ public class AccountHolder {
 	 * checking and savings combined. created by Robert J
 	 */
 	public CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) {
-		if (getCombinedBalance() < 250000) {
-			this.checkingAccount[numberOfSavingsAccount] = checkingAccount;
+		CheckingAccount[] tempArray = new CheckingAccount[this.checkingAccount.length + 1];
+		if (getCheckingBalance() + getSavingsBalance() < 250000.00) {
+			tempArray[numberOfCheckingAccount] = checkingAccount;
 			numberOfCheckingAccount++;
 		} else {
-			return null;
+			return checkingAccount;
 		}
+		this.checkingAccount = tempArray;
 		return checkingAccount;
 	}
 
@@ -157,8 +160,8 @@ public class AccountHolder {
 	 * getter for checking balance for all accounts together created by Robert J
 	 */
 	public double getCheckingBalance() {
-		for (int x = 0; x < checkingAccount.length - 1; x++) {
-			checkingAccountBalance += checkingAccount[x].getBalance();
+		for (CheckingAccount x : checkingAccount) {
+			checkingAccountBalance += x.getBalance();
 		}
 		return checkingAccountBalance;
 	}
@@ -169,12 +172,14 @@ public class AccountHolder {
 	 */
 	public SavingsAccount addSavingsAccount(double openingBalance) {
 		SavingsAccount savings = new SavingsAccount(openingBalance);
-		if (getCombinedBalance() < 250000) {
-			savingsAccount[numberOfSavingsAccount] = savings;
+		SavingsAccount[] tempArray = new SavingsAccount[savingsAccount.length + 1];
+		if (getCheckingBalance() + getSavingsBalance() + openingBalance < 250000) {
+			tempArray[numberOfSavingsAccount] = savings;
 			numberOfSavingsAccount++;
 		} else {
-			return null;
+			return savings;
 		}
+		savingsAccount = tempArray;
 		return savings;
 	}
 
@@ -183,12 +188,14 @@ public class AccountHolder {
 	 * Johns
 	 */
 	public SavingsAccount addSavingsAccount(SavingsAccount savingsAccount) {
-		if (getCombinedBalance() < 250000) {
-			this.savingsAccount[numberOfSavingsAccount] = savingsAccount;
+		SavingsAccount[] tempArray = new SavingsAccount[this.savingsAccount.length + 1];
+		if (getCheckingBalance() + getSavingsBalance() < 250000) {
+			tempArray[numberOfSavingsAccount] = savingsAccount;
 			numberOfSavingsAccount++;
 		} else {
-			return null;
+			return savingsAccount;
 		}
+		this.savingsAccount = tempArray;
 		return savingsAccount;
 	}
 
@@ -210,8 +217,8 @@ public class AccountHolder {
 	 * getter for saving balance for all accounts together created by Robert J
 	 */
 	public double getSavingsBalance() {
-		for (int y = 0; y < savingsAccount.length - 1; y++) {
-			savingsAccountBalance += savingsAccount[y].getBalance();
+		for (SavingsAccount y : savingsAccount) {
+			savingsAccountBalance += y.getBalance();
 		}
 		return savingsAccountBalance;
 	}
@@ -222,8 +229,10 @@ public class AccountHolder {
 	 */
 	public CDAccount addCDAccount(CDOffering offering, double openingBalance) {
 		CDAccount cd = new CDAccount(offering, openingBalance);
-		this.cdAccount[numberOfCDAccount] = cd;
+		CDAccount[] tempArray = new CDAccount[this.cdAccount.length + 1];
+		tempArray[numberOfCDAccount] = cd;
 		numberOfCDAccount++;
+		cdAccount = tempArray;
 		return cd;
 	}
 
@@ -232,8 +241,10 @@ public class AccountHolder {
 	 * Johns
 	 */
 	public CDAccount addCDAccount(CDAccount cdAccount) {
-		this.cdAccount[numberOfCDAccount] = cdAccount;
+		CDAccount[] tempArray = new CDAccount[this.cdAccount.length + 1];
+		tempArray[numberOfCDAccount] = cdAccount;
 		numberOfCDAccount++;
+		this.cdAccount = tempArray;
 		return cdAccount;
 	}
 
@@ -252,8 +263,8 @@ public class AccountHolder {
 	}
 
 	public double getCDBalance() {
-		for (CDAccount x : cdAccount) {
-			cdAccountBalance += x.getBalance();
+		for (CDAccount z : cdAccount) {
+			cdAccountBalance += z.getBalance();
 		}
 		return cdAccountBalance;
 	}
