@@ -61,40 +61,30 @@ public class MeritBank {
 
 	//clears the offering array
 	static void clearCDOfferings() {
-		
 		cdOffering = null;
-		
 	}
 
 	//setter for the offering array
 	static void setCDOfferings(CDOffering[] offerings) {
-		
 		cdOffering = offerings;
-		
 	}
 
 	//getter for a new Account Number
 	static long getNextAccountNumber() {
-		
 		return nextAccountNumber++;
-	
 	}
 
 	//returns the total balance of the whole account holder array
 	static double totalBalances() {
-		
 		for(AccountHolder x : accountHolderArray) {
 			totalValue += x.getCombinedBalance();
 		}
-		return totalValue;
-		
+		return totalValue;	
 	}
 
 	//returns the future value of what the user wants based off of parameters
 	static double futureValue(double presentValue, double interestRate, int term) {
-		
 		return (presentValue * (Math.pow((1 + interestRate), term)));
-		
 	}
 	
 	
