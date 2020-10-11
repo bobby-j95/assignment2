@@ -5,14 +5,15 @@ import java.util.Date;
 public class CDAccount extends BankAccount{
 	private CDOffering offering = new CDOffering();
 	private int term;
-	private Date startDate = new Date();
+	private Date startDate;
 	private double balance;
 	
 	//*created by behulum w
 	
-	CDAccount(CDOffering offering, double balance){
+	public CDAccount(CDOffering offering, double balance){
+		super(balance, offering.getInterestRate());
 		this.offering = offering;
-		this.balance = balance;
+		startDate = new Date();
 	}
 	
 	public double getBalance() {
@@ -47,9 +48,8 @@ public class CDAccount extends BankAccount{
 		return this.getAccountNumber();
 	}
 	
-	public double futureValue(int years) {
-		futureBalance = (balance * Math.pow(1.0 + getInterestRate(), years));
-		return futureBalance;
+	public double futureValue() {
+		return (balance * Math.pow(1.0 + offering.getInterestRate(), offering.getTerm()));
 		
 	}
 }
