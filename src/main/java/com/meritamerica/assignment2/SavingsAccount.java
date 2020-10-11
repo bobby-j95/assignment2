@@ -8,11 +8,13 @@ public class SavingsAccount extends BankAccount{
 	// All constants needed in class
 	private static final double INTEREST_RATE = .01;
 
-	// Default constructor
-	public SavingsAccount(double openingBalance) {
+	// Constructor that adds account to possible array 
+	public SavingsAccount addSavingsAccount(double openingBalance) {
 		this.openingBalance = openingBalance;
+		SavingsAccount save = (SavingsAccount) new BankAccount(this.openingBalance, INTEREST_RATE);
+		return save;
 	}
-
+/*
 	// returns balance
 	public double getBalance() {
 		return openingBalance;
@@ -53,7 +55,7 @@ public class SavingsAccount extends BankAccount{
 		return ("Savings Account Balance: $" + getBalance() + "\n" + "Savings Account Interest Rate: "
 				+ getInterestRate() + "\n" + "Savings Account Balance in 3 years: $" + futureValue(3));
 	}
-
+*/
 	// All private variables needed in the program
 	private double openingBalance;
 }

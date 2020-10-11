@@ -100,7 +100,7 @@ public class AccountHolder {
 	/* getter for saving Account
 	 * created by Robert J
 	 */
-	public SavingsAccount getSavingsAccount() {
+	public SavingsAccount addSavingsAccount(double openingBalance) {
 		return sav;
 	}
 	
