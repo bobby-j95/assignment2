@@ -3,16 +3,16 @@ package com.meritamerica.assignment2;
 import java.util.Date;
 
 public class CDAccount extends BankAccount{
-	private CDOffering offering = new CDOffering();
-	private int term;
-	private Date startDate = new Date();
+	private CDOffering offering = null;
+	private Date startDate;
 	private double balance;
 	
 	//*created by behulum w
 	
 	CDAccount(CDOffering offering, double balance){
+		super(balance, offering.getInterestRate());
 		this.offering = offering;
-		this.balance = balance;
+		this.startDate= new Date();
 	}
 	
 	public double getBalance() {
@@ -20,21 +20,11 @@ public class CDAccount extends BankAccount{
 	}
 	
 	public double getInterestRate() {
-		if (term==1) {
-			return 1.8/100;
-		}else if (term==2) {
-			return 1.9/100;
-		}else if (term==3) {
-			return 2.0/100;
-		}else if (term==5) {
-			return 2.5/100;
-		}else {
-			return 2.2/100;
-		}
+		return offering.getInterestRate();
 	}
 	
 	public int getTerm() {
-		return this.term;
+		return offering.getTerm();
 	}
 	
 	public java.util.Date getStartDate(){
@@ -44,12 +34,12 @@ public class CDAccount extends BankAccount{
 	// created by behulum w
 	
 	public long getAccountNumber() {
-		return this.getAccountNumber();
+		return getAccountNumber();
 	}
 	
 	public double futureValue(int years) {
-		futureBalance = (balance * Math.pow(1.0 + getInterestRate(), years));
-		return futureBalance;
+		return (balance * Math.pow(1.0 + offering.getInterestRate(), offering.getTerm()));
+		
 		
 	}
 }
