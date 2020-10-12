@@ -121,6 +121,9 @@ public class AccountHolder {
 		if (getCheckingBalance() + getSavingsBalance() + openingBalance < 250000.00) {
 			tempArray[numberOfCheckingAccount] = checking;
 			numberOfCheckingAccount++;
+		} else if (numberOfSavingsAccount > numberOfCheckingAccount) {
+			tempArray[numberOfCheckingAccount] = checking;
+			numberOfCheckingAccount++;
 		} else {
 			return checking;
 		}
@@ -138,6 +141,9 @@ public class AccountHolder {
 			tempArray[i] = this.checkingAccount[i];
 		}
 		if (getCheckingBalance() + getSavingsBalance() + checkingAccount.getBalance() < 250000.00) {
+			tempArray[numberOfCheckingAccount] = checkingAccount;
+			numberOfCheckingAccount++;
+		} else if (numberOfSavingsAccount > numberOfCheckingAccount) {
 			tempArray[numberOfCheckingAccount] = checkingAccount;
 			numberOfCheckingAccount++;
 		} else {
@@ -185,6 +191,9 @@ public class AccountHolder {
 		if (getCheckingBalance() + getSavingsBalance() + openingBalance < 250000) {
 			tempArray[numberOfSavingsAccount] = savings;
 			numberOfSavingsAccount++;
+		} else if (numberOfCheckingAccount > numberOfSavingsAccount) {
+			tempArray[numberOfSavingsAccount] = savings;
+			numberOfSavingsAccount++;
 		} else {
 			return savings;
 		}
@@ -202,6 +211,9 @@ public class AccountHolder {
 			tempArray[i] = this.savingsAccount[i];
 		}
 		if (getCheckingBalance() + getSavingsBalance() + savingsAccount.getBalance() < 250000) {
+			tempArray[numberOfSavingsAccount] = savingsAccount;
+			numberOfSavingsAccount++;
+		} else if (numberOfCheckingAccount > numberOfSavingsAccount) {
 			tempArray[numberOfSavingsAccount] = savingsAccount;
 			numberOfSavingsAccount++;
 		} else {

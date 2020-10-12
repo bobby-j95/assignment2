@@ -37,8 +37,8 @@ public class CDAccount extends BankAccount{
 		return getAccountNumber();
 	}
 	
-	public double futureValue(int years) {
-		return (balance * Math.pow(1.0 + offering.getInterestRate(), offering.getTerm()));
+	public double futureValue() {
+		return (super.getBalance() * Math.pow(1.0 + offering.getInterestRate(), offering.getTerm()));
 		
 		
 	}
