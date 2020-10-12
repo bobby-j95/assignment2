@@ -16,7 +16,7 @@ public class CDAccount extends BankAccount{
 	}
 	
 	public double getBalance() {
-		return this.balance;
+		return super.getBalance();
 	}
 	
 	public double getInterestRate() {

@@ -26,8 +26,7 @@ public class AccountHolder {
 	private double totalBalance;
 	private SavingsAccount[] savingsAccount = new SavingsAccount[0];
 	private CheckingAccount[] checkingAccount = new CheckingAccount[0];
-	private CDAccount[] cdAccount = new CDAccount[initSize];
-	private static int initSize = 5;
+	private CDAccount[] cdAccount = new CDAccount[0];
 
 	/*
 	 * Default constructor Created by Behulum W
@@ -116,6 +115,9 @@ public class AccountHolder {
 	public CheckingAccount addCheckingAccount(double openingBalance) {
 		CheckingAccount checking = new CheckingAccount(openingBalance);
 		CheckingAccount[] tempArray = new CheckingAccount[checkingAccount.length + 1];
+		for (int i = 0; i < this.checkingAccount.length; i++) {
+			tempArray[i] = this.checkingAccount[i];
+		}
 		if (getCheckingBalance() + getSavingsBalance() + openingBalance < 250000.00) {
 			tempArray[numberOfCheckingAccount] = checking;
 			numberOfCheckingAccount++;
@@ -132,7 +134,10 @@ public class AccountHolder {
 	 */
 	public CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) {
 		CheckingAccount[] tempArray = new CheckingAccount[this.checkingAccount.length + 1];
-		if (getCheckingBalance() + getSavingsBalance() < 250000.00) {
+		for (int i = 0; i < this.checkingAccount.length; i++) {
+			tempArray[i] = this.checkingAccount[i];
+		}
+		if (getCheckingBalance() + getSavingsBalance() + checkingAccount.getBalance() < 250000.00) {
 			tempArray[numberOfCheckingAccount] = checkingAccount;
 			numberOfCheckingAccount++;
 		} else {
@@ -160,6 +165,7 @@ public class AccountHolder {
 	 * getter for checking balance for all accounts together created by Robert J
 	 */
 	public double getCheckingBalance() {
+		checkingAccountBalance = 0;
 		for (CheckingAccount x : checkingAccount) {
 			checkingAccountBalance += x.getBalance();
 		}
@@ -173,6 +179,9 @@ public class AccountHolder {
 	public SavingsAccount addSavingsAccount(double openingBalance) {
 		SavingsAccount savings = new SavingsAccount(openingBalance);
 		SavingsAccount[] tempArray = new SavingsAccount[savingsAccount.length + 1];
+		for (int i = 0; i < this.savingsAccount.length; i++) {
+			tempArray[i] = this.savingsAccount[i];
+		}
 		if (getCheckingBalance() + getSavingsBalance() + openingBalance < 250000) {
 			tempArray[numberOfSavingsAccount] = savings;
 			numberOfSavingsAccount++;
@@ -189,7 +198,10 @@ public class AccountHolder {
 	 */
 	public SavingsAccount addSavingsAccount(SavingsAccount savingsAccount) {
 		SavingsAccount[] tempArray = new SavingsAccount[this.savingsAccount.length + 1];
-		if (getCheckingBalance() + getSavingsBalance() < 250000) {
+		for (int i = 0; i < this.savingsAccount.length; i++) {
+			tempArray[i] = this.savingsAccount[i];
+		}
+		if (getCheckingBalance() + getSavingsBalance() + savingsAccount.getBalance() < 250000) {
 			tempArray[numberOfSavingsAccount] = savingsAccount;
 			numberOfSavingsAccount++;
 		} else {
@@ -217,6 +229,7 @@ public class AccountHolder {
 	 * getter for saving balance for all accounts together created by Robert J
 	 */
 	public double getSavingsBalance() {
+		savingsAccountBalance = 0;
 		for (SavingsAccount y : savingsAccount) {
 			savingsAccountBalance += y.getBalance();
 		}
@@ -230,6 +243,9 @@ public class AccountHolder {
 	public CDAccount addCDAccount(CDOffering offering, double openingBalance) {
 		CDAccount cd = new CDAccount(offering, openingBalance);
 		CDAccount[] tempArray = new CDAccount[this.cdAccount.length + 1];
+		for (int i = 0; i < this.cdAccount.length; i++) {
+			tempArray[i] = this.cdAccount[i];
+		}
 		tempArray[numberOfCDAccount] = cd;
 		numberOfCDAccount++;
 		cdAccount = tempArray;
@@ -242,6 +258,9 @@ public class AccountHolder {
 	 */
 	public CDAccount addCDAccount(CDAccount cdAccount) {
 		CDAccount[] tempArray = new CDAccount[this.cdAccount.length + 1];
+		for (int i = 0; i < this.cdAccount.length; i++) {
+			tempArray[i] = this.cdAccount[i];
+		}
 		tempArray[numberOfCDAccount] = cdAccount;
 		numberOfCDAccount++;
 		this.cdAccount = tempArray;
@@ -263,19 +282,22 @@ public class AccountHolder {
 	}
 
 	public double getCDBalance() {
+		cdAccountBalance = 0;
 		for (CDAccount z : cdAccount) {
 			cdAccountBalance += z.getBalance();
 		}
 		return cdAccountBalance;
 	}
 
-	
 	/*
 	 * getter for total balance for all accounts together created by Robert J
 	 */
 	public double getCombinedBalance() {
-		totalBalance = checkingAccountBalance + savingsAccountBalance + cdAccountBalance;
-		return totalBalance;
+		/*
+		 * totalBalance = checkingAccountBalance + savingsAccountBalance +
+		 * cdAccountBalance; return totalBalance;
+		 */
+		return (getCheckingBalance() + getSavingsBalance() + getCDBalance());
 	}
 
 }

@@ -19,6 +19,9 @@ public class MeritBank {
 	//This adds another AccountHolder to the array
 	static void addAccountHolder(AccountHolder accountHolder) {
 		AccountHolder[] tempAccHolder = new AccountHolder[accountHolderArray.length+1];
+		for(int i = 0; i < accountHolderArray.length; i++) {
+			tempAccHolder[i] = accountHolderArray[i];
+		}
 		tempAccHolder[numOfAccountHolder] = accountHolder;
 		accountHolderArray = tempAccHolder;
 		numOfAccountHolder++;
